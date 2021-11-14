@@ -29,125 +29,127 @@
 <body>
     <input type="button" onclick="CreateTableFromJSON()" value="Mom's grocery list" />
     <p id="showData"></p>
+
+    <script>
+      function CreateTableFromJSON() {
+          var myBooks = [
+              
+              {
+          "Sl No": 1,
+          "Name": "Modern Bread",
+          "Quantity": 2,
+          "Unit": "packet",
+          "Department": "Bread",
+          "Notes": "Not expired"
+        }, {
+          "Sl No": 2,
+          "Name": "Basumathi",
+          "Quantity": 3,
+          "Unit": "Kg",
+          "Department": "Rice",
+          "Notes": "Good quality, small size"
+        }, {
+          "Sl No": 3,
+          "Name": "Milma",
+          "Quantity": 1,
+          "Unit": "packet",
+          "Department": "Milk",
+          "Notes": "Fresh"
+        }, {
+          "Sl No": 4,
+          "Name": "Apple",
+          "Quantity": 1,
+          "Unit": "kg",
+          "Department": "Fruit",
+          "Notes": "Green & Fresh"
+        }, {
+          "Sl No": 5,
+          "Name": "Prawns",
+          "Quantity": 1.5,
+          "Unit": "kg",
+          "Department": "Fish",
+          "Notes": "Fresh"
+        }, {
+          "Sl No": 6,
+          "Name": "Sunflower oil",
+          "Quantity": 2,
+          "Unit": "kg",
+          "Department": "Oil",
+          "Notes": " Good quality"
+        }, {
+          "Sl No": 7,
+          "Name": "Nila",
+          "Quantity": 2,
+          "Unit": "packet",
+          "Department": "Wheat powder",
+          "Notes": "Not expired"
+        }, {
+          "Sl No": 8,
+          "Name": "Veda masala",
+          "Quantity": 1,
+          "Unit": "packet",
+          "Department": "Chicken masala",
+          "Notes": "New "
+        }, {
+          "Sl No": 9,
+          "Name": "Cauliflower",
+          "Quantity": 2,
+          "Unit": "piece",
+          "Department": "vegetable",
+          "Notes": "Fresh & clean"
+        }, {
+          "Sl No": 10,
+          "Name": "Galaxy",
+          "Quantity": 5,
+          "Unit": "piece",
+          "Department": "choclate",
+          "Notes": "Not expired"
+        }
+          
+          ]
+  
+          // EXTRACT VALUE FOR HTML HEADER. 
+          // ('Book ID', 'Book Name', 'Category' and 'Price')
+          var col = [];
+          for (var i = 0; i < myBooks.length; i++) {
+              for (var key in myBooks[i]) {
+                  if (col.indexOf(key) === -1) {
+                      col.push(key);
+                  }
+              }
+          }
+  
+          // CREATE DYNAMIC TABLE.
+          var table = document.createElement("table");
+  
+          // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
+  
+          var tr = table.insertRow(-1);                   // TABLE ROW.
+  
+          for (var i = 0; i < col.length; i++) {
+              var th = document.createElement("th");      // TABLE HEADER.
+              th.innerHTML = col[i];
+              tr.appendChild(th);
+          }
+  
+          // ADD JSON DATA TO THE TABLE AS ROWS.
+          for (var i = 0; i < myBooks.length; i++) {
+  
+              tr = table.insertRow(-1);
+  
+              for (var j = 0; j < col.length; j++) {
+                  var tabCell = tr.insertCell(-1);
+                  tabCell.innerHTML = myBooks[i][col[j]];
+              }
+          }
+  
+          // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
+          var divContainer = document.getElementById("showData");
+          divContainer.innerHTML = "";
+          divContainer.appendChild(table);
+      }
+  </script>
 </body>
 
-<script>
-    function CreateTableFromJSON() {
-        var myBooks = [
-            
-            {
-        "Sl No": 1,
-        "Name": "Modern Bread",
-        "Quantity": 2,
-        "Unit": "packet",
-        "Department": "Bread",
-        "Notes": "Not expired"
-      }, {
-        "Sl No": 2,
-        "Name": "Basumathi",
-        "Quantity": 3,
-        "Unit": "Kg",
-        "Department": "Rice",
-        "Notes": "Good quality, small size"
-      }, {
-        "Sl No": 3,
-        "Name": "Milma",
-        "Quantity": 1,
-        "Unit": "packet",
-        "Department": "Milk",
-        "Notes": "Fresh"
-      }, {
-        "Sl No": 4,
-        "Name": "Apple",
-        "Quantity": 1,
-        "Unit": "kg",
-        "Department": "Fruit",
-        "Notes": "Green & Fresh"
-      }, {
-        "Sl No": 5,
-        "Name": "Prawns",
-        "Quantity": 1.5,
-        "Unit": "kg",
-        "Department": "Fish",
-        "Notes": "Fresh"
-      }, {
-        "Sl No": 6,
-        "Name": "Sunflower oil",
-        "Quantity": 2,
-        "Unit": "kg",
-        "Department": "Oil",
-        "Notes": " Good quality"
-      }, {
-        "Sl No": 7,
-        "Name": "Nila",
-        "Quantity": 2,
-        "Unit": "packet",
-        "Department": "Wheat powder",
-        "Notes": "Not expired"
-      }, {
-        "Sl No": 8,
-        "Name": "Veda masala",
-        "Quantity": 1,
-        "Unit": "packet",
-        "Department": "Chicken masala",
-        "Notes": "New "
-      }, {
-        "Sl No": 9,
-        "Name": "Cauliflower",
-        "Quantity": 2,
-        "Unit": "piece",
-        "Department": "vegetable",
-        "Notes": "Fresh & clean"
-      }, {
-        "Sl No": 10,
-        "Name": "Galaxy",
-        "Quantity": 5,
-        "Unit": "piece",
-        "Department": "choclate",
-        "Notes": "Not expired"
-      }
-        
-        ]
 
-        // EXTRACT VALUE FOR HTML HEADER. 
-        // ('Book ID', 'Book Name', 'Category' and 'Price')
-        var col = [];
-        for (var i = 0; i < myBooks.length; i++) {
-            for (var key in myBooks[i]) {
-                if (col.indexOf(key) === -1) {
-                    col.push(key);
-                }
-            }
-        }
-
-        // CREATE DYNAMIC TABLE.
-        var table = document.createElement("table");
-
-        // CREATE HTML TABLE HEADER ROW USING THE EXTRACTED HEADERS ABOVE.
-
-        var tr = table.insertRow(-1);                   // TABLE ROW.
-
-        for (var i = 0; i < col.length; i++) {
-            var th = document.createElement("th");      // TABLE HEADER.
-            th.innerHTML = col[i];
-            tr.appendChild(th);
-        }
-
-        // ADD JSON DATA TO THE TABLE AS ROWS.
-        for (var i = 0; i < myBooks.length; i++) {
-
-            tr = table.insertRow(-1);
-
-            for (var j = 0; j < col.length; j++) {
-                var tabCell = tr.insertCell(-1);
-                tabCell.innerHTML = myBooks[i][col[j]];
-            }
-        }
-
-        // FINALLY ADD THE NEWLY CREATED TABLE WITH JSON DATA TO A CONTAINER.
-        var divContainer = document.getElementById("showData");
-        divContainer.innerHTML = "";
-        divContainer.appendChild(table);
-    }
-</script>
 </html>
